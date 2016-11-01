@@ -1,0 +1,12 @@
+{
+    "require": {
+        "z1ffy/htmlgen": "dev-master",
+        "hoa/router": "~3.0",
+        "hoa/dispatcher": "~1.0"
+    },
+    "autoload" : {
+      "files": [
+        "vendor/z1ffy/htmlgen/htmlgen.php"
+      ]
+    }
+}
