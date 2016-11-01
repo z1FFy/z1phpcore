@@ -169,6 +169,7 @@ class z1Core
 		$customHead = $this->customHead;
 		$data = $this->data;
 		$title = $this->title;
+		$modulePath = $this->modulePath;
 		$siteUrl = $this->siteUrl;
 		ob_start();
 		if (empty($this->contentName)) {
@@ -191,7 +192,7 @@ class z1Core
 		if (file_exists($this->templatePath))
 			require_once($this->templatePath);
 		else
-			require($this->contentPath);
+			dbg('Template file [ '. $this->templatePath .' ] dont exist');
 	}
 
 	function includeHead($str) {
@@ -295,7 +296,9 @@ class z1mySqlCore
 	}
 }
 
-
+/**
+ * Customize error reporting
+ */
 register_shutdown_function(function () {
 	$error = error_get_last();
 	if ($error && ($error['type'] == E_ERROR || $error['type'] == E_PARSE || $error['type'] == E_COMPILE_ERROR)) {
@@ -305,7 +308,6 @@ register_shutdown_function(function () {
 		} else {
 			dbg("PHP Fatal: ".$error['message']." in ".$error['file'].":".$error['line']);
 		}
-		// ... завершаемся корректно ....
 	}
 });
 
