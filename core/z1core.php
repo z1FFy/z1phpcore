@@ -60,7 +60,7 @@ class z1Core
 
 		if (isset($_SERVER['REQUEST_URI'])) {
 			$uri = $_SERVER['REQUEST_URI'];
-		    if ($uri != '/' && $_SERVER['HTTP_HOST'].$uri != $this->domain.'/') {
+			if ($uri != '/' && $_SERVER['HTTP_HOST'].$uri != $this->domain.'/') {
 				try {
 					$uri = parse_url($uri, PHP_URL_PATH);
 					$sep = $this->modActSep;
@@ -81,7 +81,7 @@ class z1Core
 							array_splice($module,0,1);
 					}
 
-				 } catch (Exception $e) {
+				} catch (Exception $e) {
 					dbg($e);
 					$module = '404';
 					$action = 'main';
@@ -170,6 +170,7 @@ class z1Core
 		$customHead = $this->customHead;
 		$data = $this->data;
 		$title = $this->title;
+		$modulePath = '/' . $this->modulePath;
 		$siteUrl = $this->siteUrl;
 		ob_start();
 		if (empty($this->contentName)) {
@@ -311,7 +312,6 @@ register_shutdown_function(function () {
 		} else {
 			dbg("PHP Fatal: ".$error['message']." in ".$error['file'].":".$error['line']);
 		}
-		// ... завершаемся корректно ....
 	}
 });
 
