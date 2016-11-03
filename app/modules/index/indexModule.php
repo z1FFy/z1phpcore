@@ -6,9 +6,9 @@ class indexModule extends Module {
 	 * @param $page z1Core
 	 */
 	function __construct($page) {
-		$page->setTemplate('main');
 		$page->setTitle('Z1WEB CORE');
-		$page->setView('index');
+		$page->setTemplate('mainTemplate');
+		$page->setView('indexView');
 		$page->setData(['version' => 'alpha']);
 	}
 }

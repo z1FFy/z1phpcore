@@ -1,6 +1,6 @@
 <?php
 /**
- * z1WEB PHP core index file
+ * z1Core PHP Framework index file
  *
  * Developer: Denis Kuschenko
  * Site: z1web.ru
@@ -9,9 +9,9 @@
  * 2016(c)
  */
 
-require_once ('config.php'); // Include configuration file
-require_once ('lib/functions.php'); //Include functions
-require_once ('lib/z1core.php'); // Include framework library file
+require_once ('app/config.php'); // Include configuration file
+require_once ('core/functions.php'); //Include functions
+require_once ('core/z1core.php'); // Include framework library file
 $loader = require __DIR__ . '/vendor/autoload.php';
 
 

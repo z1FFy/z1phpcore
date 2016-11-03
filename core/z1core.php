@@ -60,7 +60,7 @@ class z1Core
 
 		if (isset($_SERVER['REQUEST_URI'])) {
 			$uri = $_SERVER['REQUEST_URI'];
-		    if ($uri != '/' && $_SERVER['HTTP_HOST'].$uri != $this->domain.'/') {
+			if ($uri != '/' && $_SERVER['HTTP_HOST'].$uri != $this->domain.'/') {
 				try {
 					$uri = parse_url($uri, PHP_URL_PATH);
 					$sep = $this->modActSep;
@@ -81,7 +81,7 @@ class z1Core
 							array_splice($module,0,1);
 					}
 
-				 } catch (Exception $e) {
+				} catch (Exception $e) {
 					dbg($e);
 					$module = '404';
 					$action = 'main';
@@ -112,20 +112,20 @@ class z1Core
 					}
 				}
 				$filename = '/' . $lastUriPart . 'Module.php';
-				$modulePath = 'modules/' . $module[0] . $middlePath;
+				$modulePath = 'app/modules/' . $module[0] . $middlePath;
 				$moduleFilePath = $modulePath . $filename;
 				$module = $lastUriPart;
 			} else {
 				$module = $this->indexModuleName;
 				$filename = $module . 'Module.php';
-				$modulePath = 'modules/' . $module . '/';
+				$modulePath = 'app/modules/' . $module . '/';
 				$moduleFilePath = $modulePath . $filename;
 			}
 
 			if (!file_exists($moduleFilePath)) {
 				$module = $this->indexModuleName;
 				$filename = $module . 'Module.php';
-				$modulePath = 'modules/' . $module . '/';
+				$modulePath = 'app/modules/' . $module . '/';
 				$moduleFilePath = $modulePath . $filename;
 			}
 
@@ -159,7 +159,8 @@ class z1Core
 	 * @param $templateName
 	 */
 	function setTemplate($templateName) {
-		$this->templatePath = 'templates/' . $templateName . 'Template.php';
+		$this->templateName = $templateName;
+		$this->templatePath = 'app/templates/' . $templateName . '.php';
 	}
 
 	/**
@@ -169,6 +170,7 @@ class z1Core
 		$customHead = $this->customHead;
 		$data = $this->data;
 		$title = $this->title;
+		$modulePath = '/' . $this->modulePath;
 		$siteUrl = $this->siteUrl;
 		ob_start();
 		if (empty($this->contentName)) {
@@ -180,7 +182,7 @@ class z1Core
 		} else {
 			if (!empty($this->view)) {
 				header("HTTP/1.0 404 Not Found");
-				require_once('templates/404.php');
+				require_once('app/templates/404.php');
 				die;
 			} else {
 				dbg('View path dont exists');
@@ -191,7 +193,10 @@ class z1Core
 		if (file_exists($this->templatePath))
 			require_once($this->templatePath);
 		else
-			require($this->contentPath);
+			if ($this->templateName!=null)
+				dbg('Template file [ '. $this->templatePath .' ] dont exist');
+			else
+				require($this->contentPath);
 	}
 
 	function includeHead($str) {
@@ -223,7 +228,7 @@ class z1Core
 	 */
 	function setView($contentName) {
 		$this->contentName = $contentName;
-		$this->contentPath = $this->modulePath . '/views/' . $contentName . 'View.php';
+		$this->contentPath = $this->modulePath . '/views/' . $contentName . '.php';
 	}
 
 	function connectToDB() {
@@ -295,7 +300,9 @@ class z1mySqlCore
 	}
 }
 
-
+/**
+ * Customize error reporting
+ */
 register_shutdown_function(function () {
 	$error = error_get_last();
 	if ($error && ($error['type'] == E_ERROR || $error['type'] == E_PARSE || $error['type'] == E_COMPILE_ERROR)) {
@@ -305,7 +312,6 @@ register_shutdown_function(function () {
 		} else {
 			dbg("PHP Fatal: ".$error['message']." in ".$error['file'].":".$error['line']);
 		}
-		// ... завершаемся корректно ....
 	}
 });
 
