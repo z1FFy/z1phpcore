@@ -123,10 +123,9 @@ class z1Core
 			}
 
 			if (!file_exists($moduleFilePath)) {
-				$module = $this->indexModuleName;
-				$filename = $module . 'Module.php';
-				$modulePath = 'app/modules/' . $module . '/';
-				$moduleFilePath = $modulePath . $filename;
+				header("HTTP/1.0 404 Not Found");
+				require_once('../app/templates/404.php');
+				die;
 			}
 
 			$this->modulePath = $modulePath;
@@ -182,7 +181,7 @@ class z1Core
 		} else {
 			if (!empty($this->view)) {
 				header("HTTP/1.0 404 Not Found");
-				require_once('app/templates/404.php');
+				require_once('../app/templates/404.php');
 				die;
 			} else {
 				dbg('View path dont exists');
