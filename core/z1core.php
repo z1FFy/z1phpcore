@@ -124,7 +124,7 @@ class z1Core
 
 			if (!file_exists($moduleFilePath)) {
 				header("HTTP/1.0 404 Not Found");
-				require_once('../app/templates/404.php');
+				require_once('app/templates/404.php');
 				die;
 			}
 
@@ -181,7 +181,7 @@ class z1Core
 		} else {
 			if (!empty($this->view)) {
 				header("HTTP/1.0 404 Not Found");
-				require_once('../app/templates/404.php');
+				require_once('app/templates/404.php');
 				die;
 			} else {
 				dbg('View path dont exists');
