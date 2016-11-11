@@ -1,4 +1,6 @@
 {
+  "name": "z1ffy/z1phpcore",
+  "description": "Simple MVC PHP Framework.",
     "require": {
         "z1ffy/htmlgen": "dev-master",
         "hoa/router": "~3.0",
