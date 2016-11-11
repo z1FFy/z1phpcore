@@ -266,7 +266,7 @@ class z1mySqlCore
 			DB_DATABASE);     /* База данных для запросов по умолчанию */
 
 		if (!$this->link) {
-			echo 'Невозможно подключиться к базе данных. Код ошибки: ' . mysqli_connect_error();
+			dbg('Невозможно подключиться к базе данных. Код ошибки: ' . mysqli_connect_error());
 			return false;
 		} else {
 			$this->link->set_charset('utf8');

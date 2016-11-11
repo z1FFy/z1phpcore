@@ -1,9 +1,7 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 Options +FollowSymlinks
-RewriteBase /z1core
-
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ 	index.php [L,QSA]
+RewriteRule ^ index.php [L]
 </IfModule>
