@@ -3,8 +3,7 @@
 #### Documentary
 Description : 
 
-Simple MVC PHP Framework, developed for light projects 
-and lovers minify sugar code.
+Simple MVC PHP Framework.
 
 About Features: 
 
