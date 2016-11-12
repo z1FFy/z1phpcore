@@ -112,7 +112,7 @@ class z1Core
 					}
 				}
 				$filename = '/' . $lastUriPart . 'Module.php';
-				$modulePath = 'app/modules/' . $module[0] . $middlePath;
+                $modulePath = 'app/modules/' . $module[0] . $middlePath . '/';
 				$moduleFilePath = $modulePath . $filename;
 				$module = $lastUriPart;
 			} else {
