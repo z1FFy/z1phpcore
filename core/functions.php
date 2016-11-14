@@ -63,3 +63,16 @@ function curl($url, $postFields=[]) {
 
 	return $server_output;
 }
+
+/**
+ * Search in string
+ *
+ * @param $value
+ * @param $string
+ * @return bool
+ */
+function strExists($value, $string){
+	foreach ((array) $value as $v) {
+		if (false !== strpos($string, $v)) return true;
+	}
+}
